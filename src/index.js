@@ -1,6 +1,6 @@
 const headingReg = /<h\d.*>.*<\/h\d>/g
 
-function parseDomString (str) {
+function parseDomString(str) {
   if (typeof str !== 'string') {
     return null
   }
@@ -58,7 +58,7 @@ function insertHeading(headings, target) {
   }
 }
 
-function extractor(html) {
+export default function (html) {
   const headingNodes = html.match(headingReg)
   let headings = []
 
@@ -70,5 +70,3 @@ function extractor(html) {
 
   return headings
 }
-
-module.exports = extractor

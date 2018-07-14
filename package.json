@@ -1,8 +1,8 @@
 {
   "name": "doc-head-extract",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "extract headings from html string",
+  "main": "dist/bundle.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
