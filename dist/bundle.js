@@ -4,13 +4,13 @@ function parseDomString (str) {
   if (typeof str !== 'string') {
     return null
   }
-  const reg = /<(.+)>(.*)<\/.+>/;
+  const reg = /<([^<]+)>(.*)<\/.+>/;
   const matchs = str.match(reg);
   if (matchs) {
     const head = matchs[1];
     const arr = head.split(' ');
     let content = matchs[2];
-    content = content.split(/<\/?\w[^<]*>/).join().trim();
+    content = content.split(/<\/?\w[^<]*>/).join('').trim();
     
     let obj = {
       tagName: '',
@@ -46,7 +46,7 @@ function insertHeading (headings, headObj) {
   }
 }
 
-const headingReg = /<h\d.*>.*<\/h\d>/g;
+const headingReg = /<h\d[^<]*>.*<\/h\d>/g;
 
 function getHeadingObj(node) {
   let obj = null;
