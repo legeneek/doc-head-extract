@@ -1,8 +1,6 @@
 'use strict';
 
-const headingReg = /<h\d.*>.*<\/h\d>/g;
-
-function parseDomString(str) {
+function parseDomString (str) {
   if (typeof str !== 'string') {
     return null
   }
@@ -12,7 +10,7 @@ function parseDomString(str) {
     const head = matchs[1];
     const arr = head.split(' ');
     let content = matchs[2];
-    content = content.split(/<\/?\w[^<]*>/).join();
+    content = content.split(/<\/?\w[^<]*>/).join().trim();
     
     let obj = {
       tagName: '',
@@ -31,6 +29,25 @@ function parseDomString(str) {
   }
 }
 
+function insertHeading (headings, headObj) {
+  if (!headObj) {
+    return
+  }
+  if (headings.length === 0) {
+    headings.push(headObj);
+  } else {
+    const depth = headObj.depth;
+    const h = headings[headings.length - 1];
+    if (depth <= h.depth) {
+      headings.push(headObj);
+    } else {
+      insertHeading(h.sub, headObj);
+    }
+  }
+}
+
+const headingReg = /<h\d.*>.*<\/h\d>/g;
+
 function getHeadingObj(node) {
   let obj = null;
   if (node) {
@@ -44,31 +61,13 @@ function getHeadingObj(node) {
   return obj
 }
 
-function insertHeading(headings, target) {
-  const headObj = getHeadingObj(target);
-  if (!headObj) {
-    return
-  }
-  if (headings.length === 0) {
-    headings.push(headObj);
-  } else {
-    const depth = headObj.depth;
-    const h = headings[headings.length - 1];
-    if (depth <= h.depth) {
-      headings.push(headObj);
-    } else {
-      insertHeading(h.sub, target);
-    }
-  }
-}
-
 function index (html) {
   const headingNodes = html.match(headingReg);
   let headings = [];
 
   if (headingNodes && headingNodes.length > 0) {
     for (let i = 0, len = headingNodes.length; i < len; ++i) {
-      insertHeading(headings, parseDomString(headingNodes[i]));
+      insertHeading(headings, getHeadingObj(parseDomString(headingNodes[i])));
     }
   }
 
