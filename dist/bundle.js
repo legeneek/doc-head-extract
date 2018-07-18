@@ -10,8 +10,10 @@ function parseDomString(str) {
   const matchs = str.match(reg);
   if (matchs) {
     const head = matchs[1];
-    const content = matchs[2];
     const arr = head.split(' ');
+    let content = matchs[2];
+    content = content.split(/<\/?\w[^<]*>/).join();
+    
     let obj = {
       tagName: '',
       props: {},
