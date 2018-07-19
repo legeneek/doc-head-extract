@@ -1,7 +1,13 @@
 import parseDom from '../src/utils/parse-dom'
 
 test('illegal input should get null', () => {
-  const html = {}
+  const html = null
+  const dom = parseDom(html)
+  expect(dom).toBeNull()
+})
+
+test('no tag match should get null', () => {
+  const html = 'foo'
   const dom = parseDom(html)
   expect(dom).toBeNull()
 })

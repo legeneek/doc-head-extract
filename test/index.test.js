@@ -1,4 +1,4 @@
-import extractHead from '../dist/bundle'
+import extractHead from '../src/index'
 
 test('extract no heading html get empty array', () => {
   let res = extractHead('<p>test</p>')

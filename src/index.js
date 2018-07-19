@@ -4,16 +4,12 @@ import insertHeading from './utils/insert-heading'
 const headingReg = /<h\d[^<]*>.*<\/h\d>/g
 
 function getHeadingObj(node) {
-  let obj = null
-  if (node) {
-    obj = {
-      anchor: node.props.id,
-      name: node.content,
-      sub: [],
-      depth: +node.tagName.substr(1)
-    }
+  return {
+    anchor: node.props.id,
+    name: node.content,
+    sub: [],
+    depth: +node.tagName.substr(1)
   }
-  return obj
 }
 
 export default function (html) {
