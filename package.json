@@ -1,6 +1,6 @@
 {
   "name": "doc-head-extract",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "extract headings from html string",
   "main": "dist/bundle.js",
   "scripts": {
