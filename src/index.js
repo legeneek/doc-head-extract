@@ -1,7 +1,7 @@
 import parseDomString from './utils/parse-dom'
 import insertHeading from './utils/insert-heading'
 
-const headingReg = /<h\d[^<]*>.*<\/h\d>/g
+const headingReg = /<h\d[^<]*>[^<]*<\/h\d>/g
 
 function getHeadingObj(node) {
   return {
